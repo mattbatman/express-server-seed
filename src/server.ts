@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { router } from "./router";
 import { protect } from "./modules/auth";
-import { createNewUser, signin } from "./handlers/user";
+import { apiCreateNewUser, apiSignin } from "./handlers/user";
 
 const app = express();
 
@@ -18,8 +18,8 @@ app.get("/", (req, res) => {
   res.json({ message: "hello" });
 });
 
-app.use("/api", protect, router);
-app.post("/user", createNewUser);
-app.post("/signin", signin);
+app.post("/api/user", apiCreateNewUser);
+app.post("/api/signin", apiSignin);
+app.use("/api/user", protect, router);
 
 export { app };
